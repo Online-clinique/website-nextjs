@@ -1,10 +1,13 @@
 import '../styles/globals.css';
 import { AppWrapper } from '../context/index';
+import { SnackbarProvider } from 'notistack';
 
 function MyApp({ Component, pageProps }) {
 	return (
 		<AppWrapper>
-			<Component {...pageProps} />
+			<SnackbarProvider>
+				<Component {...pageProps} />
+			</SnackbarProvider>
 		</AppWrapper>
 	);
 }

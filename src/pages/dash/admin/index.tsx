@@ -1,6 +1,8 @@
 import { axiosInstance } from '../../../services/axios-instance';
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import Layout from '../../../components/Layout';
+import LoginForm from '../../../components/login-form';
+import AdminProfile from '../../../components/admin-profile';
 
 interface IAdmin {
 	[x: string]: {
@@ -27,13 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 function Admin({ user }: IAdmin) {
-	return (
-		<Layout>
-			{user
-				? 'you are an admin and you email is ' + user.full_name
-				: 'Not logged in'}
-		</Layout>
-	);
+	return <Layout>{user ? <AdminProfile user={user} /> : <LoginForm />}</Layout>;
 }
 
 export default Admin;
