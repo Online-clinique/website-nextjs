@@ -4,11 +4,13 @@ import DoctorModal from './Doctors-modal';
 import Footer from './footer';
 import Navbar from './navbar';
 import slugi from 'slugify';
+import AddDoctorModal from './AddDoctorModal';
 
 function AdminProfile(props: { user: any }) {
 	// console.log(props.user);
 	const [mydoctors, SetDoctors] = React.useState([]);
 	const [ShowModal, setShowModal] = React.useState(false);
+	const [showDoctorModal, setShowDoctorModal] = React.useState(false);
 
 	async function FetchMeta() {
 		const res = await axiosInstance.get('/admin/mydocs').catch((res) => res);
@@ -64,12 +66,14 @@ function AdminProfile(props: { user: any }) {
 									<div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
 										<div className="relative">
 											<img
-												alt="..."
+												alt="Profile Picture"
 												src={
 													props.user.photo_de_profile ||
-													`https://via.placeholder.com/300.png/140000/1487c8?text=${slugi(
-														props.user.full_name || 'User'
-													)}`
+													`https://via.placeholder.com/300.png/140000/1487c8?text=${
+														slugi(props.user.full_name || 'User')
+															.split('-')
+															.slice(1)[0]
+													}`
 												}
 												className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
 												style={{ maxWidth: '150px' }}
@@ -89,9 +93,27 @@ function AdminProfile(props: { user: any }) {
 												className="bg-blue-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
 												type="button"
 												style={{ transition: 'all .15s ease' }}
+												onClick={() => setShowDoctorModal(!showDoctorModal)}
 											>
 												Ajouter Un docteur
 											</button>
+											<form
+												action="http://localhost:8000/api/admin/signout"
+												method="GET"
+												className="inline-block"
+											>
+												<button
+													style={{ transition: 'all .15s ease' }}
+													className="bg-red-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+												>
+													Sign out
+												</button>
+											</form>
+											{showDoctorModal ? (
+												<AddDoctorModal
+													setShowDoctorModal={setShowDoctorModal}
+												/>
+											) : null}
 										</div>
 									</div>
 									<div className="w-full lg:w-4/12 px-4 lg:order-1">
@@ -135,15 +157,11 @@ function AdminProfile(props: { user: any }) {
 										{props.user.full_name.toUpperCase()}
 									</h3>
 									<div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-										<i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{' '}
+										<i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>{' '}
 										{props.user.admin ? 'Administrator' : props.user.username}
 									</div>
-									<div className="mb-2 text-gray-700 mt-10">
-										<i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
-										Portal Manager
-									</div>
+									<div className="mb-2 text-gray-700 mt-10">Portal Manager</div>
 									<div className="mb-2 text-gray-700">
-										<i className="fas fa-university mr-2 text-lg text-gray-500"></i>
 										{/* University of Computer Science */}
 									</div>
 								</div>

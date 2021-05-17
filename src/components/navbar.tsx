@@ -20,7 +20,7 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 							(props.transparent ? 'text-white' : 'text-gray-800') +
 							' text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase'
 						}
-						href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
+						href="/"
 					>
 						Clinique Online
 					</a>
@@ -68,7 +68,7 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 						</li>
 					</ul> */}
 					<ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-						<li className="flex items-center">
+						{/* <li className="flex items-center">
 							<a
 								className={
 									(props.transparent
@@ -130,7 +130,7 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 								/>
 								<span className="lg:hidden inline-block ml-2">Star</span>
 							</a>
-						</li>
+						</li> */}
 
 						<li className="flex items-center">
 							<button
@@ -146,7 +146,7 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 								style={{ transition: 'all .15s ease' }}
 								disabled={props.login}
 							>
-								<i className="fas fa-arrow-alt-circle-down"></i>{' '}
+								{' '}
 								<div className={props.login ? 'text-gray-400' : ''}>Login</div>
 							</button>
 						</li>

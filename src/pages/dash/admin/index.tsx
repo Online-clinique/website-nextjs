@@ -3,6 +3,7 @@ import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import Layout from '../../../components/Layout';
 import LoginForm from '../../../components/login-form';
 import AdminProfile from '../../../components/admin-profile';
+import Head from 'next/head';
 
 interface IAdmin {
 	[x: string]: {
@@ -29,7 +30,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 function Admin({ user }: IAdmin) {
-	return <Layout>{user ? <AdminProfile user={user} /> : <LoginForm />}</Layout>;
+	return (
+		<Layout absolute>
+			<Head>
+				<link
+					rel="stylesheet"
+					href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+				/>
+			</Head>
+			{user ? <AdminProfile user={user} /> : <LoginForm />}
+		</Layout>
+	);
 }
 
 export default Admin;

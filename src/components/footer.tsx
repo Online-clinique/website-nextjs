@@ -8,8 +8,9 @@ function Footer(props: FooterProps) {
 	return (
 		<footer
 			className={
-				(props.absolute ? 'absolute w-full bottom-0 bg-gray-900' : 'relative') +
-				' pb-6'
+				(props.absolute
+					? 'absolute w-full bottom-0 bg-gray-900'
+					: 'relative w-full bg-gray-900') + ' pb-6'
 			}
 		>
 			<div className="container mx-auto px-4">
