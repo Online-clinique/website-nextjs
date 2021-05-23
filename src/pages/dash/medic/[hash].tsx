@@ -1,11 +1,14 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import axios from 'axios';
 import { axiosInstance } from '../../../services/axios-instance';
 import Layout from '../../../components/Layout';
-import Select from 'react-select';
 import { specialite } from '../../../services/specialité';
 import AddDoctorForm from '../../../components/AddDoctorForm';
+import cookie from 'cookie';
+
+function parseCookies(res) {
+	return res.headers['set-cookie'][0];
+}
 
 interface IProvided {
 	id: string;
@@ -15,12 +18,20 @@ interface IProvided {
 	added_by: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+	params,
+	res,
+	req,
+}) => {
 	try {
 		const response = await axiosInstance
 			.get(`/medic/verify/${params.hash}`)
-			.then((res) => res);
-		console.log(response.data.message);
+			.then((res_server) => {
+				// console.log(parseCookies(res_server));
+				res.setHeader('set-cookie', parseCookies(res_server));
+				return res_server;
+			});
+
 		return {
 			props: {
 				validToken: response.data.status === 200 ? true : false,
@@ -29,8 +40,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 			},
 		};
 	} catch (error) {
+		console.log(error);
 		return {
-			props: { validToken: false, errors: error.response.data.errors },
+			props: { validToken: false, errors: error.response.data.message },
 		};
 	}
 };
@@ -49,7 +61,7 @@ function ValidateHash({
 	username,
 	id,
 }: IProps & IProvided) {
-	const [selectedSpec, setSelectedSpecialit] = React.useState('');
+	const [selectedSpec, setSelectedSpecialit] = React.useState([]);
 
 	return (
 		<>
