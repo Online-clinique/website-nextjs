@@ -1,3 +1,5 @@
+import { moment } from "../pages";
+
 export const specialite = [
 	{ value: 'Médecin généraliste', label: 'Médecin généraliste' },
 	{ value: 'Ophtalmologue', label: 'Ophtalmologue' },
@@ -139,3 +141,12 @@ export const specialite = [
 ];
 
 export const moyenne_de_payement = [];
+
+
+
+export const days_of_the_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => {
+	return {
+		label: day,
+		value: moment().isoWeekday(day).day().toString()
+	}
+})

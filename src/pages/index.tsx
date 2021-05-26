@@ -29,7 +29,6 @@ export default function Home() {
 	// });
 
 	// console.log(moment.range(moment(), moment().add(2, 'month')));
-	console.log('nice, i can read it', moment('2021/05/25').format('DD-MM-YY'));
 	return (
 		<div>
 			<Layout absolute>{''}</Layout>
