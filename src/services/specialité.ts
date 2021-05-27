@@ -1,4 +1,5 @@
-import { moment } from "../pages";
+import slugify from 'slugify';
+import { moment } from '../pages/_app';
 
 export const specialite = [
 	{ value: 'Médecin généraliste', label: 'Médecin généraliste' },
@@ -142,11 +143,70 @@ export const specialite = [
 
 export const moyenne_de_payement = [];
 
-
-
-export const days_of_the_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => {
+export const days_of_the_week = [
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+	'Sunday',
+].map((day) => {
 	return {
 		label: day,
-		value: moment().isoWeekday(day).day().toString()
-	}
-})
+		value: moment().isoWeekday(day).day().toString(),
+	};
+});
+
+export const cities = [
+	'Autre',
+	'Agadir',
+	'Arfoud',
+	'Azrou',
+	'Benguérir',
+	'Beni Mellal',
+	'Benslimane',
+	'Berkane',
+	'Berrechid',
+	'Casablanca',
+	'Dakhla',
+	'Dar Bouazza',
+	'El Jadida',
+	'Errachidia',
+	'Essaouira',
+	'Fkih Ben Saleh',
+	'Fés',
+	'Had Soualem',
+	'Inezgane',
+	'Khemisset',
+	'Khouribga',
+	'Khénifra',
+	'Kénitra',
+	'Larache',
+	'Laâyoune',
+	'Marrakech',
+	'Mechra Bel Ksiri',
+	'Meknés',
+	'Mohammedia',
+	'Nador',
+	'Ouarzazate',
+	'Oujda',
+	'Rabat',
+	'Safi',
+	'Salé',
+	'Settat',
+	'Sidi Bennour',
+	'Sidi Kacem',
+	'Skhirat',
+	'Tanger',
+	'Taroudant',
+	'Tata',
+	'Taza',
+	'Temara',
+	'Tétouan',
+].map((city) => {
+	return {
+		label: city,
+		value: slugify(city, '-'),
+	};
+});

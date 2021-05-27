@@ -1,7 +1,11 @@
 import '../styles/globals.css';
-import '../styles/timepicket.css'
+import '../styles/timepicket.css';
 import { AppWrapper } from '../context/index';
 import { SnackbarProvider } from 'notistack';
+import * as Moment from 'moment';
+import { extendMoment } from 'moment-range';
+
+export const moment = extendMoment(Moment);
 
 function MyApp({ Component, pageProps }) {
 	return (

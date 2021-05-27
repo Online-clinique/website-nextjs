@@ -5,7 +5,7 @@ import Footer from './footer';
 function Layout({ children, absolute }) {
 	return (
 		<div>
-			<Navbar login transparent={false} />
+			<Navbar login={false} transparent={false} />
 			{children}
 			<Footer absolute={absolute} />
 		</div>

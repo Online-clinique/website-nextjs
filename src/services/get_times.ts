@@ -1,12 +1,16 @@
 import { moment } from '../pages/index';
 
-export const calcTimes = (
-	jour: Date,
-	heure_ouverture: number,
-	heure_fermeture: number
-) => {
-	const day_start = moment(jour).startOf('day').hours(heure_ouverture); // 7 am
-	const day_end = moment(jour).startOf('day').hours(heure_fermeture); // 10 pm
+export const calcTimes = (jour: Date, time_debut: string, time_fin: string) => {
+	const splitDebut = time_debut.split(/:/);
+	const splitFin = time_fin.split(/:/);
+	const day_start = moment(jour)
+		.startOf('day')
+		.hours(+splitDebut[0])
+		.minute(+splitDebut[1]); // 7 am
+	const day_end = moment(jour)
+		.startOf('day')
+		.hours(+splitFin[0])
+		.minute(+splitFin[1]); // 10 pm
 	const day = moment.range(day_start, day_end);
 	const time_slots = Array.from(day.by('minutes', { step: 20 }));
 	console.log(time_slots[0]);

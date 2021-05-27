@@ -4,13 +4,10 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Layout from '../../../components/Layout';
 
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps } from 'next';
 import { axiosInstance } from '../../../services/axios-instance';
 
-
-
 const localizer = momentLocalizer(moment);
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const calendar = await axiosInstance
@@ -34,27 +31,29 @@ interface IEventObject {
 }
 
 function CalendarVue({ user }) {
-	const [CalendarList, setCalendarList] = React.useState<IEventObject[]>(user?.calendar || [{
-		start: moment().toDate(),
-		end: moment().add(20, 'minute').toDate(),
-		title: 'Mohamed'
-	}]);
+	const [CalendarList, setCalendarList] = React.useState<IEventObject[]>(
+		user?.calendar || [
+			{
+				start: moment().toDate(),
+				end: moment().add(20, 'minute').toDate(),
+				title: 'Mohamed',
+			},
+		]
+	);
 
 	return (
-		<Layout absolute={false}>
-			{
-				!user ?
-					<div className="w-3/4 justify-center mx-auto p-5 mt-10">
-						<Calendar
-							localizer={localizer}
-							events={CalendarList}
-							startAccessor="start"
-							endAccessor="end"
-							style={{ height: 500 }}
-						/>
-					</div>
-					: null
-			}
+		<Layout absolute={true}>
+			{!user ? (
+				<div className="w-3/4 justify-center mx-auto p-5 mt-10">
+					<Calendar
+						localizer={localizer}
+						events={CalendarList}
+						startAccessor="start"
+						endAccessor="end"
+						style={{ height: 500 }}
+					/>
+				</div>
+			) : null}
 		</Layout>
 	);
 }
