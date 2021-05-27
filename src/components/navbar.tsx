@@ -152,31 +152,35 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 							</a>
 						</li> */}
 
-						<li className="flex items-center">
-							<button
-								className={
-									(props.transparent
-										? 'bg-white text-gray-800 active:bg-gray-100'
-										: props.login
-										? 'bg-blue-900 text-white active:bg-blue-600'
-										: ' text-white active:bg-blue-600 rounded-full mr-10') +
-									' font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-								}
-								type="button"
-								style={{
-									transition: 'all .15s ease',
-									backgroundColor: '#BE281E',
-								}}
-								// disabled={props.login}
-							>
-								{' '}
-								<div className={props.login ? 'text-gray-400' : ''}>
-									<Link href="/patient/signup">
-										<a>Crée Un compte</a>
-									</Link>
-								</div>
-							</button>
-						</li>
+						{!loggedIn ? (
+							<li className="flex items-center">
+								<button
+									className={
+										(props.transparent
+											? 'bg-white text-gray-800 active:bg-gray-100'
+											: props.login
+											? 'bg-blue-900 text-white active:bg-blue-600'
+											: ' text-white active:bg-blue-600 rounded-full mr-10') +
+										' font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+									}
+									type="button"
+									style={{
+										transition: 'all .15s ease',
+										backgroundColor: '#BE281E',
+									}}
+									// disabled={props.login}
+								>
+									{' '}
+									<div className={props.login ? 'text-gray-400' : ''}>
+										<Link href="/patient/signup">
+											<a>Crée Un compte</a>
+										</Link>
+									</div>
+								</button>
+							</li>
+						) : (
+							''
+						)}
 						<li className="flex items-center">
 							<button
 								className={
