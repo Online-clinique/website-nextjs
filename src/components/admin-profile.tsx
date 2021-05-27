@@ -69,11 +69,11 @@ function AdminProfile(props: { user: any }) {
 												alt="Profile Picture"
 												src={
 													props.user.photo_de_profile ||
-													`https://via.placeholder.com/300.png/140000/1487c8?text=${
-														slugi(props.user.full_name || 'User')
-															.split('-')
-															.slice(1)[0]
-													}`
+													'https://via.placeholder.com/384x576/3DC6DB/000000?text=' +
+														props.user.full_name
+															.split(' ')
+															.map((nm) => nm[0])
+															.join('')
 												}
 												className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
 												style={{ maxWidth: '150px' }}

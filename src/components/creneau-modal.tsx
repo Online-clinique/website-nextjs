@@ -13,15 +13,15 @@ function CreneauModal({
 }) {
 	const { closeSnackbar, enqueueSnackbar } = useSnackbar();
 
-	const splitDebut = doctor.debut_jour.split(/:/);
-	const splitFini = doctor.fin_jour.split(/:/);
+	const splitDebut = doctor.debut_jour?.split(/:/);
+	const splitFini = doctor.fin_jour?.split(/:/);
 	const [start, setStart] = React.useState({
-		hours: splitDebut[0] || '',
-		minute: splitDebut[1] || '',
+		hours: splitDebut ? splitDebut[0] : '',
+		minute: splitDebut ? splitDebut[1] : '',
 	});
 	const [fin, setFin] = React.useState({
-		hours: splitFini[0] || '',
-		minute: splitFini[1] || '',
+		hours: splitFini ? splitFini[0] : '',
+		minute: splitFini ? splitFini[1] : '',
 	});
 
 	const timeGex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;

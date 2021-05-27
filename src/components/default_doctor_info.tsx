@@ -3,10 +3,12 @@ import React from 'react';
 import Link from 'next/link';
 import { IDoctor } from '../utils/doctor.interface';
 import CreneauModal from './creneau-modal';
-import moment from 'moment';
+import { useRouter } from 'next/router';
 
-function DefaultDoctorInfo({ doctor }: { doctor: IDoctor }) {
+function DefaultDoctorInfo({ doctor, href }: { doctor: IDoctor; href: any }) {
 	const [ModalCreneau, setModalCreneau] = React.useState(false);
+	const { pathname } = useRouter();
+
 	return (
 		<div className="px-6">
 			{ModalCreneau && (
@@ -17,7 +19,13 @@ function DefaultDoctorInfo({ doctor }: { doctor: IDoctor }) {
 					<div className="relative">
 						<img
 							alt="Profile Picture"
-							src={`https://via.placeholder.com/300.png/140000/1487c8?text=DOCTOR`}
+							src={
+								'https://via.placeholder.com/384x576/3DC6DB/000000?text=' +
+								doctor.full_name
+									.split(' ')
+									.map((nm) => nm[0])
+									.join('')
+							}
 							className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
 							style={{ maxWidth: '150px' }}
 						/>

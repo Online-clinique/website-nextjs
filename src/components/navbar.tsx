@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { axiosInstance } from '../services/axios-instance';
 
 function Navbar(props: { login: boolean; transparent: boolean }) {
 	const [avatarDropDown, toggleAvatarDropDown] = useState<boolean>(false);
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	React.useEffect(() => {
+		axiosInstance('/doctor/me')
+			.then((res) => {
+				setLoggedIn(res.data.full_name);
+			})
+			.catch((err) => {
+				setLoggedIn(false);
+			});
+	}, []);
 
 	return (
 		<nav
@@ -158,7 +171,9 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 							>
 								{' '}
 								<div className={props.login ? 'text-gray-400' : ''}>
-									Crée Un compte
+									<Link href="/patient/signup">
+										<a>Crée Un compte</a>
+									</Link>
 								</div>
 							</button>
 						</li>
@@ -180,7 +195,9 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 								disabled={props.login}
 							>
 								{' '}
-								<div className={props.login ? 'text-gray-400' : ''}>Login</div>
+								<div className={props.login ? 'text-gray-400' : ''}>
+									{!loggedIn ? 'Login' : loggedIn}
+								</div>
 							</button>
 						</li>
 					</ul>

@@ -12,6 +12,7 @@ import { setInterval } from 'timers';
 import Select from 'react-select';
 import { cities, specialite } from '../services/specialité';
 import { moment } from './_app';
+import { useRouter } from 'next/router';
 
 const DatePickerInput = forwardRef(({ value, onClick }: any, ref: any) => (
 	<button
@@ -25,6 +26,12 @@ const DatePickerInput = forwardRef(({ value, onClick }: any, ref: any) => (
 
 export default function Home() {
 	const [urltop, SetUrl] = useState<string>('');
+	const [villeSelected, setVilleSelected] =
+		useState<{ value: string; label: string }>(null);
+	const [catSelected, setCatSelected] =
+		useState<{ value: string; label: string }>(null);
+	const [query, setQuery] = useState<string>('');
+	const router = useRouter();
 
 	const sleep = (t: number) => {
 		return new Promise((resolve, reject) => {
@@ -32,6 +39,14 @@ export default function Home() {
 				resolve(void 0);
 			}, t);
 		});
+	};
+
+	const commitQuery = async () => {
+		await router.push(
+			`/search/${villeSelected?.value || 'all'}/${
+				catSelected?.value || 'all'
+			}/${query || 'all'}`
+		);
 	};
 
 	// time_slots.forEach((time_slot) => {
@@ -67,10 +82,10 @@ export default function Home() {
 									<svg className="fill-current h-5 w-5" viewBox="0 0 20 20">
 										<path
 											d="M3.015,4.779h1.164V3.615H3.015V4.779z M18.73,1.869H1.269c-0.322,0-0.582,0.26-0.582,0.582v15.133
-            c0,0.322,0.26,0.582,0.582,0.582H18.73c0.321,0,0.582-0.26,0.582-0.582V2.451C19.312,2.129,19.052,1.869,18.73,1.869z
-            M18.148,16.42c0,0.322-0.261,0.582-0.582,0.582H2.433c-0.322,0-0.582-0.26-0.582-0.582V6.525h16.297V16.42z M18.148,5.361H1.851
-            V3.615c0-0.322,0.26-0.582,0.582-0.582h15.133c0.321,0,0.582,0.26,0.582,0.582V5.361z M7.671,4.779h1.165V3.615H7.671V4.779z
-            M5.344,4.779h1.164V3.615H5.344V4.779z"
+											c0,0.322,0.26,0.582,0.582,0.582H18.73c0.321,0,0.582-0.26,0.582-0.582V2.451C19.312,2.129,19.052,1.869,18.73,1.869z
+											M18.148,16.42c0,0.322-0.261,0.582-0.582,0.582H2.433c-0.322,0-0.582-0.26-0.582-0.582V6.525h16.297V16.42z M18.148,5.361H1.851
+											V3.615c0-0.322,0.26-0.582,0.582-0.582h15.133c0.321,0,0.582,0.26,0.582,0.582V5.361z M7.671,4.779h1.165V3.615H7.671V4.779z
+											M5.344,4.779h1.164V3.615H5.344V4.779z"
 										/>
 									</svg>
 								</div>
@@ -134,6 +149,10 @@ export default function Home() {
 															options={cities}
 															className="w-full text-base placeholder-gray-600 rounded-lg focus:shadow-outline mb-10"
 															isSearchable
+															value={villeSelected}
+															onChange={(v) => {
+																setVilleSelected(v);
+															}}
 														/>
 													</div>
 												</div>
@@ -143,6 +162,10 @@ export default function Home() {
 														options={specialite}
 														className="w-full text-base placeholder-gray-600 rounded-lg focus:shadow-outline mb-10"
 														isSearchable
+														value={catSelected}
+														onChange={(c) => {
+															setCatSelected(c);
+														}}
 													/>
 												</div>
 											</div>
@@ -165,11 +188,18 @@ export default function Home() {
 															type="text"
 															placeholder="Nom du docteur"
 															className="bg-gray-300 max-w-full focus:outline-none text-gray-700"
+															value={query}
+															onChange={(e) => {
+																setQuery(e.target.value);
+															}}
 														/>
 													</div>
 													<div className="flex border rounde items-center p-2 ">
 														<div className="w-full">
-															<button className="p-2 border w-full rounded-md bg-gray-800 text-white">
+															<button
+																className="p-2 border w-full rounded-md bg-gray-800 text-white"
+																onClick={commitQuery}
+															>
 																Search
 															</button>
 														</div>

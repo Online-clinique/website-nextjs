@@ -139,7 +139,12 @@ export const specialite = [
 	{ value: 'Médecine Esthétique', label: 'Médecine Esthétique' },
 	{ value: 'Lasers Médicaux', label: 'Lasers Médicaux' },
 	{ value: 'Médecine Régénérative', label: 'Médecine Régénérative' },
-];
+].map((spec) => {
+	return {
+		value: slugify(spec.value, '-'),
+		label: spec.label,
+	};
+});
 
 export const moyenne_de_payement = [];
 

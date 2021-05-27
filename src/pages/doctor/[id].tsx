@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 function DoctorById({ profile }) {
 	return (
 		<div>
-			<Layout absolute>
+			<Layout absolute={false}>
 				<main className="profile-page">
 					<section className="relative block" style={{ height: '500px' }}>
 						<div
@@ -62,7 +62,11 @@ function DoctorById({ profile }) {
 													alt="Profile Picture"
 													src={
 														profile.data.photo_de_profile ||
-														`https://via.placeholder.com/300.png/140000/1487c8?text=${profile.data.full_name}`
+														'https://via.placeholder.com/600/3DC6DB/000000?text=' +
+															profile.data.full_name
+																.split(' ')
+																.map((nm) => nm[0])
+																.join('')
 													}
 													className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
 													style={{ maxWidth: '150px' }}

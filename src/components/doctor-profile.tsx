@@ -18,9 +18,11 @@ function DoctorProfile({ doctor }: { doctor: IDoctor }) {
 			label: string;
 		}[]
 	>(
-		days_of_the_week.filter((daysofweek) => {
-			return doctor.days_off.split(',').includes(daysofweek.value);
-		})
+		doctor.days_off
+			? days_of_the_week.filter((daysofweek) => {
+					return doctor.days_off.split(',').includes(daysofweek.value);
+			  })
+			: null
 	);
 	const [value, onChange] = React.useState(moment().hour(6).minute(0));
 
@@ -50,6 +52,36 @@ function DoctorProfile({ doctor }: { doctor: IDoctor }) {
 				});
 		} catch (error) {
 			console.log(error.message);
+		}
+	};
+
+	const submitAbout = async (event) => {
+		event.preventDefault();
+
+		if (!event.target.about.value) {
+			return enqueueSnackbar('Remplir la case de A propos de vous');
+		}
+
+		try {
+			const update = axiosInstance.post('/doctor/about', {
+				about: event.target.about.value,
+				profile_image: null,
+				cover_image: null,
+			});
+
+			const result = (await update).data;
+
+			if (result.status < 400) {
+				enqueueSnackbar('Success, A propos a ete mis a jour', {
+					variant: 'success',
+				});
+			} else {
+				enqueueSnackbar(result.message);
+			}
+		} catch (error) {
+			enqueueSnackbar('Something happened', {
+				variant: 'warning',
+			});
 		}
 	};
 
@@ -189,7 +221,7 @@ function DoctorProfile({ doctor }: { doctor: IDoctor }) {
 												</div>
 											</div>
 											<div className="mt-5 md:mt-0 md:col-span-2">
-												<form onSubmit={submitDaysOff}>
+												<form onSubmit={submitAbout}>
 													<div className="shadow sm:rounded-md sm:overflow-hidden">
 														<div className="px-4 py-5 bg-white space-y-6 sm:p-6">
 															<div>

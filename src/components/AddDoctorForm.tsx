@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { axiosInstance } from '../services/axios-instance';
 
 import { useSnackbar } from 'notistack';
+import { cities } from '../services/specialité';
 
 interface IDodMetaDate {
 	id: string;
@@ -22,6 +23,8 @@ function AddDoctorForm({
 	setSelectedSpecialit,
 }: IDodMetaDate) {
 	const { closeSnackbar, enqueueSnackbar } = useSnackbar();
+	const [ville, setVille] =
+		React.useState<{ label: string; value: string }>(null);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -58,6 +61,7 @@ function AddDoctorForm({
 				specialite: {
 					...selectedSpec,
 				},
+				ville: ville,
 			})
 			.then((res) => res.data)
 			.catch((err) => {
@@ -188,6 +192,19 @@ function AddDoctorForm({
 						id="cni"
 						name="cni"
 						required
+					/>
+				</div>
+				<div className="w-full mb-4">
+					<label className="block mb-1" htmlFor="Ville">
+						Ville
+					</label>
+					<Select
+						options={cities}
+						onChange={(option) => {
+							console.log(option);
+							setVille(option);
+						}}
+						isMulti={false}
 					/>
 				</div>
 				<div className="flex flex-wrap -mx-2 space-y-4 md:space-y-0">
