@@ -3,6 +3,8 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { axiosInstance } from '../../services/axios-instance';
 import Layout from '../../components/Layout';
+import Appointement from '../../components/appointement';
+import { IDoctor } from '../../utils/doctor.interface';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	const response = await axiosInstance.get(`/doctor/${params.id}`);
@@ -14,7 +16,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	};
 };
 
-function DoctorById({ profile }) {
+function DoctorById({
+	profile,
+}: {
+	profile: {
+		data: IDoctor;
+	};
+}) {
+	const { debut_jour, fin_jour, days_off } = profile.data;
+
+	const verified = debut_jour && fin_jour && days_off;
 	return (
 		<div>
 			<Layout absolute={false}>
@@ -54,7 +65,7 @@ function DoctorById({ profile }) {
 					<section className="relative py-16 bg-gray-300">
 						<div className="container mx-auto px-4">
 							<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-								<div className="px-6">
+								<div className="px-2">
 									<div className="flex flex-wrap justify-center">
 										<div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
 											<div className="relative">
@@ -75,20 +86,6 @@ function DoctorById({ profile }) {
 										</div>
 										<div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
 											<div className="py-6 px-3 mt-32 sm:mt-0">
-												<button
-													className="bg-blue-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-													type="button"
-													style={{ transition: 'all .15s ease' }}
-												>
-													Ajouter Admin
-												</button>
-												<button
-													className="bg-blue-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-													type="button"
-													style={{ transition: 'all .15s ease' }}
-												>
-													Consulté le calendrier
-												</button>
 												<form
 													action="http://localhost:8000/api/admin/signout"
 													method="GET"
@@ -105,12 +102,6 @@ function DoctorById({ profile }) {
 										</div>
 										<div className="w-full lg:w-4/12 px-4 lg:order-1">
 											<div className="flex justify-center py-4 lg:pt-4 pt-8">
-												<div className="mr-4 p-3 text-center">
-													<span className="text-xl font-bold block uppercase tracking-wide text-gray-700"></span>
-													<span className="text-sm text-blue-400 underline hover:shadow-md hover:text-blue-500 cursor-pointer">
-														Docteurs
-													</span>
-												</div>
 												{/* <div className="mr-4 p-3 text-center">
 												<span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
 													10
@@ -122,7 +113,7 @@ function DoctorById({ profile }) {
 														{profile.data.id}
 													</span>
 													<span className="text-sm text-gray-500">
-														Admin ID
+														Medic ID
 													</span>
 												</div>
 											</div>
@@ -156,6 +147,11 @@ function DoctorById({ profile }) {
 											</a> */}
 											</div>
 										</div>
+										<Appointement
+											days_off={profile.data.days_off}
+											verified={Boolean(verified)}
+											profile={profile.data}
+										/>
 									</div>
 								</div>
 							</div>

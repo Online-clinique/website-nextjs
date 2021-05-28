@@ -23,6 +23,7 @@ export interface IDoctor {
 	fin_jour: string;
 	ville: string;
 	expertise: Expertise[];
+	admin?: boolean;
 }
 
 export interface Expertise {

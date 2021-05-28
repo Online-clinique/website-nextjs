@@ -5,7 +5,7 @@ import { IDoctor } from '../utils/doctor.interface';
 import CreneauModal from './creneau-modal';
 import { useRouter } from 'next/router';
 
-function DefaultDoctorInfo({ doctor, href }: { doctor: IDoctor; href: any }) {
+function DefaultDoctorInfo({ doctor }: { doctor: IDoctor; href?: any }) {
 	const [ModalCreneau, setModalCreneau] = React.useState(false);
 	const { pathname } = useRouter();
 
@@ -20,7 +20,7 @@ function DefaultDoctorInfo({ doctor, href }: { doctor: IDoctor; href: any }) {
 						<img
 							alt="Profile Picture"
 							src={
-								'https://via.placeholder.com/384x576/3DC6DB/000000?text=' +
+								'https://via.placeholder.com/600/3DC6DB/000000?text=' +
 								doctor.full_name
 									.split(' ')
 									.map((nm) => nm[0])

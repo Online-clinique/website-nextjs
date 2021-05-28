@@ -182,27 +182,28 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 							''
 						)}
 						<li className="flex items-center">
-							<button
-								className={
-									(props.transparent
-										? 'bg-white text-gray-800 active:bg-gray-100'
-										: props.login
-										? 'bg-blue-900 text-white active:bg-blue-600'
-										: ' text-white active:bg-blue-600 ') +
-									' font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-								}
-								type="button"
-								style={{
-									transition: 'all .15s ease',
-									backgroundColor: '#C9A33A',
-								}}
-								disabled={props.login}
-							>
-								{' '}
-								<div className={props.login ? 'text-gray-400' : ''}>
-									{!loggedIn ? 'Login' : loggedIn}
-								</div>
-							</button>
+							<Link href="/patient/login">
+								<a
+									className={
+										(props.transparent
+											? 'bg-white text-gray-800 active:bg-gray-100'
+											: props.login
+											? 'bg-blue-900 text-white active:bg-blue-600'
+											: ' text-white active:bg-blue-600 ') +
+										' font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+									}
+									type="button"
+									style={{
+										transition: 'all .15s ease',
+										backgroundColor: '#C9A33A',
+									}}
+								>
+									{' '}
+									<div className={props.login ? 'text-gray-400' : ''}>
+										{!loggedIn ? 'Login' : loggedIn}
+									</div>
+								</a>
+							</Link>
 						</li>
 					</ul>
 				</div>

@@ -24,21 +24,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		.catch((err) => null);
 	return {
 		props: {
-			user: user ? user.data : null,
+			user: user?.data.admin ? user.data : null,
 		}, // will be passed to the page component as props
 	};
 };
 
 function Admin({ user }: IAdmin) {
 	return (
-		<Layout absolute>
+		<Layout absolute={true}>
 			<Head>
 				<link
 					rel="stylesheet"
 					href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
 				/>
 			</Head>
-			{user ? <AdminProfile user={user} /> : <LoginForm />}
+			{user ? <AdminProfile user={user} /> : <LoginForm admin={true} />}
 		</Layout>
 	);
 }

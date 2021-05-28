@@ -135,7 +135,7 @@ function DoctorProfile({ doctor }: { doctor: IDoctor }) {
 														Choix des jours férié
 													</h3>
 													<p className="mt-1 text-sm text-gray-600">
-														Cochez les que vous n'etes pas disponible
+														Cochez les que Jours vous n'etes pas disponible
 													</p>
 												</div>
 											</div>
@@ -238,8 +238,7 @@ function DoctorProfile({ doctor }: { doctor: IDoctor }) {
 																		rows={3}
 																		className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border p-1 border-gray-300 rounded-md"
 																		placeholder="Je suis un docteur generaliste diplomé de paris"
-																		defaultValue={''}
-																		value={doctor.about}
+																		defaultValue={doctor.about}
 																	/>
 																</div>
 																<p className="mt-2 text-sm text-gray-500">

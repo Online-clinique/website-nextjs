@@ -69,7 +69,7 @@ function AdminProfile(props: { user: any }) {
 												alt="Profile Picture"
 												src={
 													props.user.photo_de_profile ||
-													'https://via.placeholder.com/384x576/3DC6DB/000000?text=' +
+													'https://via.placeholder.com/600/3DC6DB/000000?text=' +
 														props.user.full_name
 															.split(' ')
 															.map((nm) => nm[0])

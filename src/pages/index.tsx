@@ -4,8 +4,7 @@ import styles from '../styles/Home.module.css';
 import * as Moment from 'moment';
 import { DateRange, extendMoment } from 'moment-range';
 import React, { useState, forwardRef } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+
 import { calcTimes, getDatesTobeExcluded } from '../services/get_times';
 import Layout from '../components/Layout';
 import { setInterval } from 'timers';

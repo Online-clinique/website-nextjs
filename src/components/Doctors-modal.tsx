@@ -27,7 +27,7 @@ function DoctorModal({ setShowModal, doctors }) {
 										return (
 											<div>
 												<a
-													href={`http://localhost:8000/doctor/${doc.id}`}
+													href={`http://localhost:5500/doctor/${doc.id}`}
 													className="w-full flex flex-wrap m-auto mb-4 mt-4"
 												>
 													{doc.full_name || doc.username}

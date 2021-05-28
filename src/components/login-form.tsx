@@ -3,7 +3,7 @@ import { axiosInstance } from '../services/axios-instance';
 import { useSnackbar } from 'notistack';
 import Router from 'next/router';
 
-function LoginForm() {
+function LoginForm(props: { admin: boolean }) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 	async function LoginSubmit(event: any) {
@@ -43,7 +43,7 @@ function LoginForm() {
 						backgroundRepeat: 'no-repeat',
 					}}
 				></div>
-				<div className="container mx-auto px-4 h-full">
+				<div className="container mx-auto px-4 h-3/5">
 					<div className="flex content-center items-center justify-center h-full">
 						<div className="w-full lg:w-4/12 px-4">
 							<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-700 border-0">
@@ -75,7 +75,7 @@ function LoginForm() {
 								</div>
 								<div className="flex-auto px-4 lg:px-10 py-10 pt-0">
 									<div className="text-gray-100 text-center mb-3 font-bold">
-										<h1>Sign in as admin</h1>
+										<h1>Sign in as {props.admin ? 'admin' : 'Patient'}</h1>
 									</div>
 									<form onSubmit={LoginSubmit}>
 										<div className="relative w-full mb-3">
