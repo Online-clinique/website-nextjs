@@ -12,24 +12,46 @@ function LoginForm(props: { admin: boolean }) {
 		const username = event.target.username.value;
 		const password = event.target.password.value;
 
-		const res = await axiosInstance
-			.post('/admin/login', { username, password })
-			.catch((err) => {
-				enqueueSnackbar(err.response.data.message, {
-					variant: 'warning',
+		if (props.admin) {
+			const res = await axiosInstance
+				.post('/admin/login', { username, password })
+				.catch((err) => {
+					enqueueSnackbar(err.response.data.message, {
+						variant: 'warning',
+					});
+					console.log(err.response.data);
+					return err;
 				});
-				console.log(err.response.data);
-				return err;
-			});
 
-		if (res.data) {
-			enqueueSnackbar('Welcome back', {
-				variant: 'success',
-			});
+			if (res.data) {
+				enqueueSnackbar('Welcome back', {
+					variant: 'success',
+				});
 
-			setTimeout(() => {
-				Router.reload();
-			}, 1500);
+				setTimeout(() => {
+					Router.reload();
+				}, 1500);
+			}
+		} else {
+			const res = await axiosInstance
+				.post('/user/login', { username, password })
+				.catch((err) => {
+					enqueueSnackbar(err.response.data.message, {
+						variant: 'warning',
+					});
+					console.log(err.response.data);
+					return err;
+				});
+
+			if (res.data) {
+				enqueueSnackbar('Welcome back', {
+					variant: 'success',
+				});
+
+				setTimeout(() => {
+					Router.reload();
+				}, 1500);
+			}
 		}
 	}
 	return (
