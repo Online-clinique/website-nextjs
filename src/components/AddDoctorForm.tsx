@@ -4,6 +4,7 @@ import { axiosInstance } from '../services/axios-instance';
 
 import { useSnackbar } from 'notistack';
 import { cities } from '../services/specialité';
+import Router from 'next/router';
 
 interface IDodMetaDate {
 	id: string;
@@ -73,6 +74,9 @@ function AddDoctorForm({
 			enqueueSnackbar('Success Votre compte est prét"', {
 				variant: 'success',
 			});
+			setTimeout(() => {
+				Router.push('/dash/medic');
+			}, 1000);
 		} else {
 			// console.log();
 
