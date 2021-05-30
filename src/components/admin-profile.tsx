@@ -16,6 +16,7 @@ function AdminProfile(props: { user: any }) {
 		axiosInstance
 			.get('/admin/mydocs')
 			.then((res) => {
+				console.log(res.data);
 				SetDoctors(res.data.doctors);
 				return res;
 			})
@@ -125,7 +126,9 @@ function AdminProfile(props: { user: any }) {
 										<div className="flex justify-center py-4 lg:pt-4 pt-8">
 											<div className="mr-4 p-3 text-center">
 												<span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-													{!mydoctors.length ? 'Loading...' : mydoctors.length}
+													{!mydoctors?.length
+														? 'Loading...'
+														: mydoctors?.length}
 												</span>
 												<span
 													className="text-sm text-blue-400 underline hover:shadow-md hover:text-blue-500 cursor-pointer"
