@@ -13,11 +13,13 @@ function AdminProfile(props: { user: any }) {
 	const [showDoctorModal, setShowDoctorModal] = React.useState(false);
 
 	async function FetchMeta() {
-		const res = await axiosInstance.get('/admin/mydocs').catch((res) => res);
-
-		if (res.data) {
-			SetDoctors(res.data.doctors);
-		}
+		axiosInstance
+			.get('/admin/mydocs')
+			.then((res) => {
+				SetDoctors(res.data.doctors);
+				return res;
+			})
+			.catch((err) => err);
 	}
 
 	React.useEffect(() => {
