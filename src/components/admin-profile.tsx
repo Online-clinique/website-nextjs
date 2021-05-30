@@ -19,7 +19,10 @@ function AdminProfile(props: { user: any }) {
 				SetDoctors(res.data.doctors);
 				return res;
 			})
-			.catch((err) => err);
+			.catch((err) => {
+				console.log(err);
+				return err;
+			});
 	}
 
 	React.useEffect(() => {
