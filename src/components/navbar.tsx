@@ -13,9 +13,12 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 				setLoggedIn(res.data.full_name);
 			})
 			.catch((err) => {
-				axiosInstance.get('/user/me').then((res) => {
-					setLoggedIn(res.data.payload.full_name);
-				});
+				axiosInstance
+					.get('/user/me')
+					.then((res) => {
+						setLoggedIn(res.data.payload.full_name);
+					})
+					.catch((err) => null);
 				setLoggedIn(false);
 			});
 	}, []);
