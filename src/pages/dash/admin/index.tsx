@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 function Admin({ user }: IAdmin) {
 	return (
-		<Layout absolute={true}>
+		<Layout absolute={false}>
 			<Head>
 				<link
 					rel="stylesheet"
