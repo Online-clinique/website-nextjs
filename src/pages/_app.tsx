@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../styles/main.css';
 import '../styles/timepicket.css';
 import { AppWrapper } from '../context/index';
 import { SnackbarProvider } from 'notistack';
