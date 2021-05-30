@@ -49,7 +49,7 @@ function LoginForm(props: { admin: boolean }) {
 				});
 
 				setTimeout(() => {
-					Router.reload();
+					Router.push('/patient/profile');
 				}, 1500);
 			}
 		}

@@ -41,7 +41,7 @@ function DefaultDoctorInfo({ doctor }: { doctor: IDoctor; href?: any }) {
                             Ajouter Admin
 									</button> */}
 						<form
-							action="http://localhost:8000/api/admin/signout"
+							action="https://online-api.game-linter.com/api/admin/signout"
 							method="GET"
 							className="inline-block"
 						>
@@ -83,7 +83,7 @@ function DefaultDoctorInfo({ doctor }: { doctor: IDoctor; href?: any }) {
 									</button> */}
 							<button
 								style={{ transition: 'all .15s ease' }}
-								className="bg-cyan-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 mb-4"
+								className="bg-cyan-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-4"
 							>
 								<Link href="/dash/medic/calendar">
 									<a>Consulter Calendrier</a>

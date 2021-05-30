@@ -8,19 +8,27 @@ import { IDoctor } from '../../utils/doctor.interface';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	const response = await axiosInstance.get(`/doctor/${params.id}`);
-
+	const appointements = await axiosInstance
+		.get(`/my-appointements/${params.id}`)
+		.then((res) => res.data);
 	return {
 		props: {
 			profile: response.data,
+			taken_appoint: appointements,
 		},
 	};
 };
 
 function DoctorById({
 	profile,
+	taken_appoint,
 }: {
 	profile: {
 		data: IDoctor;
+	};
+	taken_appoint: {
+		status: number;
+		payload: { start: string }[];
 	};
 }) {
 	const { debut_jour, fin_jour, days_off } = profile.data;
@@ -87,7 +95,7 @@ function DoctorById({
 										<div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
 											<div className="py-6 px-3 mt-32 sm:mt-0">
 												<form
-													action="http://localhost:8000/api/admin/signout"
+													action="https://online-api.game-linter.com/api/admin/signout"
 													method="GET"
 													className="inline-block"
 												>
@@ -151,6 +159,7 @@ function DoctorById({
 											days_off={profile.data.days_off}
 											verified={Boolean(verified)}
 											profile={profile.data}
+											taken={taken_appoint}
 										/>
 									</div>
 								</div>

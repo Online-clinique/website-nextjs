@@ -11,10 +11,15 @@ function Appointement({
 	days_off,
 	verified,
 	profile,
+	taken,
 }: {
 	days_off: string;
 	verified: boolean;
 	profile: IDoctor;
+	taken: {
+		status: number;
+		payload: { start: string }[];
+	};
 }) {
 	const [startDate, setStartDate] = React.useState<Date | null>(null);
 	const [date_time, setDate_time] = React.useState<string | null>(null);
@@ -158,33 +163,35 @@ function Appointement({
 										Choisir le temps du rendez-vous
 									</h1>
 									<div className="my-2 mx-4 flex flex-wrap">
-										{calcTimes(
-											startDate,
-											profile.debut_jour,
-											profile.fin_jour
-										).map((mmnt) => {
-											return mmnt.format('HH:mm') === date_time ? (
-												<button
-													className="flex py-2 px-4 bg-cyan-600 rounded-md mx-2 my-4 hover:"
-													name={mmnt.format('HH:mm')}
-													onClick={(e: any) => {
-														setDate_time(mmnt.format('HH:mm'));
-													}}
-												>
-													{mmnt.format('HH:mm')}
-												</button>
-											) : (
-												<button
-													className="flex py-2 px-4 bg-cyan-300 rounded-md mx-2 my-4 hover:"
-													name={mmnt.format('HH:mm')}
-													onClick={(e: any) => {
-														setDate_time(mmnt.format('HH:mm'));
-													}}
-												>
-													{mmnt.format('HH:mm')}
-												</button>
-											);
-										})}
+										{calcTimes(startDate, profile.debut_jour, profile.fin_jour)
+											.filter((val) => {
+												return !taken?.payload?.includes({
+													start: val.format(),
+												});
+											})
+											.map((mmnt) => {
+												return mmnt.format('HH:mm') === date_time ? (
+													<button
+														className="flex py-2 px-4 bg-cyan-600 rounded-md mx-2 my-4 hover:"
+														name={mmnt.format('HH:mm')}
+														onClick={(e: any) => {
+															setDate_time(mmnt.format('HH:mm'));
+														}}
+													>
+														{mmnt.format('HH:mm')}
+													</button>
+												) : (
+													<button
+														className="flex py-2 px-4 bg-cyan-300 rounded-md mx-2 my-4 hover:"
+														name={mmnt.format('HH:mm')}
+														onClick={(e: any) => {
+															setDate_time(mmnt.format('HH:mm'));
+														}}
+													>
+														{mmnt.format('HH:mm')}
+													</button>
+												);
+											})}
 									</div>
 								</div>
 							) : null}
