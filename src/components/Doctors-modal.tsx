@@ -27,7 +27,7 @@ function DoctorModal({ setShowModal, doctors }) {
 										return (
 											<div>
 												<a
-													href={`https://online-api.game-linter.com/doctor/${doc.id}`}
+													href={`https://online-clinique.game-linter.com/doctor/${doc.id}`}
 													className="w-full flex flex-wrap m-auto mb-4 mt-4"
 												>
 													{doc.full_name || doc.username}
