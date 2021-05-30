@@ -1,9 +1,6 @@
 import React from 'react';
 import { axiosInstance } from '../services/axios-instance';
 import DoctorModal from './Doctors-modal';
-import Footer from './footer';
-import Navbar from './navbar';
-import slugi from 'slugify';
 import AddDoctorModal from './AddDoctorModal';
 
 function AdminProfile(props: { user: any }) {

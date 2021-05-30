@@ -188,7 +188,7 @@ function Navbar(props: { login: boolean; transparent: boolean }) {
 							''
 						)}
 						<li className="flex items-center">
-							<Link href={loggedIn ? '/patient/profile' : 'patient/login'}>
+							<Link href={loggedIn ? '/patient/profile' : '/patient/login'}>
 								<a
 									className={
 										(props.transparent
