@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 		.get(`/search/${params.spec}/${params.cat}/${params.doctor}`)
 		.then((res) => res.data)
 		.catch((err) => {
-			console.log(err)
+			console.log(err);
 			return err;
 		});
 	return {
@@ -70,7 +70,7 @@ function DcotorEploreView({ query_result, spec, cat, doctor }) {
 									</p>
 								</dt>
 								<dd className="mt-2 ml-16 text-base text-gray-500">
-									{??.length}
+									{query_result?.length}
 								</dd>
 							</div>
 							<div className="relative">
