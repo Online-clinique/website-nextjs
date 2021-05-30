@@ -56,7 +56,7 @@ export default function Home() {
 
 	// let count = 1;
 	React.useEffect(() => {
-		const url = 'https://clinique-online.com';
+		const url = 'https://online-clinique.game-linter.com';
 		let currentUrl = '';
 		(async () => {
 			for await (const iterator of url) {
