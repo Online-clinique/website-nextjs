@@ -12,7 +12,11 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
 	const response = await axiosInstance
 		.get(`/search/${params.spec}/${params.cat}/${params.doctor}`)
-		.then((res) => res.data);
+		.then((res) => res.data)
+		.catch((err) => {
+			console.log(err)
+			return err;
+		});
 	return {
 		props: {
 			query_result: response,
@@ -27,7 +31,7 @@ function DcotorEploreView({ query_result, spec, cat, doctor }) {
 	const router = useRouter();
 
 	return (
-		<Layout absolute={!query_result.length}>
+		<Layout absolute={!query_result?.length}>
 			<div className="py-12 bg-white">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="lg:text-center">
@@ -66,7 +70,7 @@ function DcotorEploreView({ query_result, spec, cat, doctor }) {
 									</p>
 								</dt>
 								<dd className="mt-2 ml-16 text-base text-gray-500">
-									{query_result.length}
+									{??.length}
 								</dd>
 							</div>
 							<div className="relative">
@@ -99,8 +103,8 @@ function DcotorEploreView({ query_result, spec, cat, doctor }) {
 							</div>
 						</dl>
 						<div className="flex w-full my-9"></div>
-						{query_result.length ? (
-							query_result.map((doctor) => {
+						{query_result?.length ? (
+							query_result?.map((doctor) => {
 								return <CardDoctor doctor={doctor} />;
 							})
 						) : (
