@@ -165,9 +165,11 @@ function Appointement({
 									<div className="my-2 mx-4 flex flex-wrap">
 										{calcTimes(startDate, profile.debut_jour, profile.fin_jour)
 											.filter((val) => {
-												return !taken?.payload?.includes({
-													start: val.format(),
-												});
+												const start_strings = taken.payload.map(
+													(taken_time) => taken_time.start
+												);
+
+												return !start_strings.includes(val.format());
 											})
 											.map((mmnt) => {
 												return mmnt.format('HH:mm') === date_time ? (
