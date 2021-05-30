@@ -98,7 +98,7 @@ function AdminProfile(props: { user: any }) {
 												Ajouter Un docteur
 											</button>
 											<form
-												action="http://localhost:8000/api/admin/signout"
+												action="https://online-api.game-linter.com/api/admin/signout"
 												method="GET"
 												className="inline-block"
 											>
